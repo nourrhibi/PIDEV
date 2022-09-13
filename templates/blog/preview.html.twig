@@ -1,0 +1,143 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap");
+html {
+	background: linear-gradient(
+			to bottom right,
+			transparent 48%,
+			#efefef 48%,
+			#efefef 52%,
+			transparent 52%
+		),
+		linear-gradient(
+			to bottom left,
+			transparent 48%,
+			#efefef 48%,
+			#efefef 52%,
+			transparent 52%
+		);
+	background-size: 0.25rem 0.25rem;
+}
+body {
+	width: 100%;
+	max-width: 1000px;
+	font-family: sans-serif;
+	padding-bottom: 1vw;
+	margin: 0 auto;
+	box-shadow: 0 0 300px rgb(26, 69, 212);
+}
+
+h1 {
+	column-span: all;
+	background: rgb(23, 207, 213);
+	color: white;
+	font-size: 10vw;
+	margin: 0;
+	padding-left: 1rem;
+}
+
+.article-meta {
+	column-span: all;
+	padding-right: 1rem;
+	padding-bottom: 1rem;
+}
+.article-meta * {
+	display: inline-block;
+	vertical-align: middle;
+}
+.article-meta svg {
+	float: right;
+	margin-top: -3rem;
+	filter: saturate(0) contrast(5);
+	border-radius: 50%;
+	border: 0.5rem solid black;
+	box-shadow: inset 0 0 0 2px black;
+	box-sizing: border-box;
+	transition: 0.75s;
+}
+.article-meta svg:hover {
+	filter: saturate(1) contrast(1);
+}
+.article-meta p {
+	margin: 0.25rem 0;
+}
+.article-meta span {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+h2 {
+	background: rgb(193, 16, 152);
+	color: white;
+	font-size: 2rem;
+	column-span: all;
+	padding: 1rem;
+	width: fit-content;
+	max-width: 75%;
+}
+
+figure {
+	width: max(50%, 350px);
+	float:right;
+	padding: 0 1rem;
+	margin: 0;
+}
+img {
+	width: 100%;
+	filter: grayscale(1) contrast(0.75);
+	transition: 0.75s;
+}
+img:hover {
+	filter: grayscale(0) contrast(1);
+}
+figcaption {
+	font-size: 0.75rem;
+}
+
+p {
+	line-height: 1.5rem;
+	padding: 0 1.5rem;
+	font-family: "Noticia Text", serif;
+    overflow: auto
+}
+
+</style>
+
+
+<h1 class="headline">Blog Preview</h1>
+<div class="article-meta">
+	<svg id="author-avatar" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+		<title id="avatarTitle">Author Avatar</title>
+		<desc id="avatarDesc">A cartoon avatar of a smiling purple square on a blue background.</desc>
+		<mask id="mask__beam" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="36">
+			<rect width="36" height="36" rx="72" fill="white"></rect>
+		</mask>
+		<g mask="url(#mask__beam)">
+			<rect width="36" height="36" fill="#0ebeff"></rect>
+			<rect x="0" y="0" width="36" height="36" transform="translate(6 6) rotate(192 18 18) scale(1)" fill="#754cac" rx="6"></rect>
+			<g transform="translate(0 2) rotate(-2 18 18)">
+				<path d="M13,19 a1,0.75 0 0,0 10,0" fill="white"></path>
+				<rect x="12" y="14" width="1.5" height="2" rx="1" stroke="none" fill="white"></rect>
+				<rect x="22" y="14" width="1.5" height="2" rx="1" stroke="none" fill="white"></rect>
+			</g>
+		</g>
+	</svg>
+	<p class="byline">by Penny Pen</p>
+	<p class="dateline">{{ blog.date ? blog.date|date('Y-m-d') : '' }}</p>
+	<p class="article-tags">
+		<span class="tag">{{ blog.categorie }}</span> 
+	</p>
+</div>
+
+<h2 class="subhead">{{ blog.nom }}</h2>
+<figure><img src="{{ asset('/back/images/')}}{{ blog.image }}" alt="a smiling person in a pink hoodie, standing in front of a bright pink lighted arcade basketball game. " />
+	<figcaption>Photo by Freddy G</figcaption>
+</figure>
+
+{{blog.descri | raw}}
+
+
+
+<!-- full size image: https://images.unsplash.com/flagged/photo-1556339911-7ef846e7db43-->
+
+
+

@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog index{% endblock %}
+
+{% block body %}
+ 
+<div class="main-content app-content mt-0">
+                <div class="side-app">
+                 <div class="main-container container-fluid">
+
+                        <!-- PAGE-HEADER -->
+                        <div class="page-header">
+                            <h1 class="page-title">Blog </h1>
+                            </div>
+<div class="main-header-center ms-3 d-none d-lg-block">
+                            <input  type="text" class="form-control" id="myInput"  placeholder="Search for results...">
+                            <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                        </div>
+
+                                                                <table class="table" id="t">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Id</th>
+                                                                            <th>Nom</th>
+                                                                            <th>Descri</th>
+                                                                            <th>Date</th>
+                                                                            <th>categorie</th>
+                                                                            <th>Image</th>
+                                                                            <th>actions</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="myTable">
+                                                                    {% for blog in blogs %}
+                                                                        <tr>
+                                                                            <td>{{ blog.id }}</td>
+                                                                            <td>{{ blog.nom }}</td>
+                                                                            <td>{{ blog.descri }}</td>
+                                                                            
+                                                                            <td>{{ blog.date ? blog.date|date('Y-m-d') : '' }}</td>
+                                                                            <td>{{ blog.categorie}}</td>
+                                                                            <td><img src="{{ asset('/back/images/')}}{{ blog.image }}" width="100"  /></td>
+                                                                            
+                                                                            <td> <a href="{{ path('app_edit_back', {'id': blog.id}) }}" class="btn text-primary btn-sm"
+                                                                                            data-bs-toggle="tooltip"
+                                                                                            data-bs-original-title="Edit"><span
+                                                                                                class="fe fe-edit fs-14"></span></a>
+
+
+
+                                                                                       <a href="{{ path('delete',{'id': blog.id}) }}" class="btn text-danger btn-sm"
+                                                                                            data-bs-toggle="tooltip"
+                                                                                            data-bs-original-title="Delete"><span
+                                                                                                class="fe fe-trash-2 fs-14"></span></a> 
+
+
+ 
+                                                                                                <a href="{{ path('app_blog_show', {'id': blog.id}) }}">
+                                                                                  <span class="glyphicon glyphicon-eye-open"></span>
+                                                                                            </a>
+                                                                                        </td>      
+                    
+                                                                        </tr>
+                                                                    {% else %}
+                                                                        <tr>
+                                                                            <td colspan="6">no records found</td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                    </tbody>
+                                                                </table>
+ <a href="{{ path('app_blog_new') }}">Create new</a>
+    {{ knp_pagination_render(blogs) }}
+                                                    </div>
+                                                       </div>
+                                                          </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        console.log("ssss");
+    </script>
+{% endblock %}

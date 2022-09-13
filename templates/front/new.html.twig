@@ -1,0 +1,50 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}New Blog{% endblock %}
+
+{% block body %}
+   <div class="main-content app-content mt-0">
+                <div class="side-app">
+                 <div class="main-container container-fluid">
+
+                        <!-- PAGE-HEADER -->
+                        <div class="page-header">
+                            <h1 class="page-title">Ajouter Blog </h1>
+                            </div>
+
+                             <div class="form-group">
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+    <div class="form-group" data-sb-validations="required">
+        {{ form_label(form.nom	, ' Nom')  }}
+        {{ form_widget(form.nom	  ,{'attr': {'class': 'form-control form-control-user' , 'placeholder' : ' Nom'}} ) }}
+
+    </div>
+     <div class="form-group" data-sb-validations="required">
+        {{ form_label(form.descri	, ' description')  }}
+        {{ form_widget(form.descri  ,{'attr': {'class': 'form-control form-control-user' , 'placeholder' : ' description'}} ) }}
+
+    </div>
+ <div class="form-group" data-sb-validations="required">
+        {{ form_label(form.date	, ' Date')  }}
+        {{ form_widget(form.date	  ,{'attr': {'class': 'form-control form-control-user' , 'placeholder' : ' date'}} ) }}
+
+    </div>
+ <div class="form-group" data-sb-validations="required">
+        {{ form_label(form.image	, ' Image')  }}
+        {{ form_widget(form.image	  ,{'attr': {'class': 'form-control form-control-user' , 'placeholder' : ' image'}} ) }}
+
+    </div>
+     <div class="form-group" data-sb-validations="required">
+        {{ form_label(form.categorie	, ' categorie')  }}
+        {{ form_widget(form.categorie	  ,{'attr': {'class': 'form-control form-control-user' , 'placeholder' : ' categorie'}} ) }}
+
+    </div>
+                        
+
+                          {{ form_end(form) }}
+
+                          </div>
+                         </div>
+                          </div>
+{% endblock %}

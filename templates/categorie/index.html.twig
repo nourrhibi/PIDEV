@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+   
+<div class="main-content app-content mt-0">
+                <div class="side-app">
+                 <div class="main-container container-fluid">
+
+                        <!-- PAGE-HEADER -->
+                        <div class="page-header">
+                            <h1 class="page-title">Categories </h1>
+                            </div>
+<div class="main-header-center ms-3 d-none d-lg-block">
+                            <input  type="text" class="form-control" id="myInput"  placeholder="Search for results...">
+                            <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                        </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Nom</th>
+                                                <th>actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="myTable">
+                                        {% for categorie in categories %}
+                                            <tr>
+                                                <td>{{ categorie.id }}</td>
+                                                <td>{{ categorie.nom }}</td>
+                                                <td>
+                                                   <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn text-primary btn-sm"
+                                                                                            data-bs-toggle="tooltip"
+                                                                                            data-bs-original-title="Edit"><span
+                                                                                                class="fe fe-edit fs-14"></span></a>
+
+
+
+                                                                                       <a href="{{ path('app_categorie_delete',{'id': categorie.id}) }}" class="btn text-danger btn-sm"
+                                                                                            data-bs-toggle="tooltip"
+                                                                                            data-bs-original-title="Delete"><span
+                                                                                                class="fe fe-trash-2 fs-14"></span></a> 
+
+
+ 
+                                                                                                <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}">
+                                                                                  <span class="glyphicon glyphicon-eye-open"></span>
+                                                                                            </a>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="3">no records found</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                    <a href="{{ path('app_categorie_new') }}">Create new</a>
+                                </div>
+                                </div>
+                                </div>
+
+                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        console.log("ssss");
+    </script>
+{% endblock %}

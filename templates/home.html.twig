@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background: #7f7fd5;
+  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin-block: 2rem;
+  gap: 2rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: clamp(20rem, calc(20rem + 2vw), 22rem);
+  overflow: hidden;
+  box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  background: #ece9e6;
+  background: linear-gradient(to right, #ffffff, #ece9e6);
+}
+
+.card__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tag {
+  align-self: flex-start;
+  padding: 0.25em 0.75em;
+  border-radius: 1em;
+  font-size: 0.75rem;
+}
+
+.tag + .tag {
+  margin-left: 0.5em;
+}
+
+.tag-blue {
+  background: #56ccf2;
+  background: linear-gradient(to bottom, #2f80ed, #56ccf2);
+  color: #fafafa;
+}
+
+.tag-brown {
+  background: #d1913c;
+  background: linear-gradient(to bottom, #ffd194, #d1913c);
+  color: #fafafa;
+}
+
+.tag-red {
+  background: #cb2d3e;
+  background: linear-gradient(to bottom, #ef473a, #cb2d3e);
+  color: #fafafa;
+}
+
+.card__body h4 {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.card__footer {
+  display: flex;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.user {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.user__image {
+  border-radius: 50%;
+}
+
+.user__info > small {
+  color: #666;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+a {
+  text-decoration: none;
+  color: #0074d9;
+}
+
+.underline {
+  position: relative;
+}
+
+.underline::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background-color: #0074d9;
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .underline:hover::before {
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
+}
+
+/* menu */
+
+/* menu */ 
+
+
+</style>
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+    {{include("nav.html.twig")}}
+
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2"  id="filter" type="search" placeholder="Search" aria-label="Search" name ="searchbox" onkeyup="searchBlog()">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+
+    <div class="container" id="container">
+      
+        {% for blog in tableusers %}
+
+        <div class="card" id="card-lists">
+          
+          <div class="card__header">
+            <img src="{{ asset('/back/images/')}}{{ blog.image }}" alt="card__image" class="card__image" width="600">
+          </div>
+          <div class="card__body">
+            <span class="tag tag-blue">{{blog.categorie}}</span>
+            <h4><a href="{{ path('preview', {'id': blog.id}) }}" class="underline">{{blog.nom}}</a></h4>
+            {{blog.descri | slice(0, 200) | raw }}
+          </div>
+          <div class="card__footer">
+            <div class="user">
+              <img src="https://i.pravatar.cc/40?img=1" alt="user__image" class="user__image">
+              <div class="user__info">
+                <a href="{{ path('app_blog_edit', {'id': blog.id}) }}" class="btn text-primary btn-sm"  data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                    <i class='fas fa-edit' style='font-size:24px'></i></a>
+
+                    <a href="{{ path('deletehome',{'id': blog.id}) }}" class="btn text-danger btn-sm"  data-bs-toggle="tooltip"  data-bs-original-title="Delete">
+                        <i class='far fa-trash-alt' style='font-size:24px'></i></a>                                                                    
+                               
+                        <a href="{{ path('preview', {'id': blog.id}) }}" class="btn btn-outline-primary"> Read more </a>
+                                                                                              
+                                                                                          
+                </div>
+                                                                                            
+            </div>
+          </div>
+
+      
+        </div>
+      
+        {% endfor%}
+
+      </div>
+
+      <script>
+       function searchBlog() {
+        const input = document.getElementById('filter').value.toUpperCase();
+        const cardContainer = document.getElementById('container');
+        console.log(cardContainer);
+
+        const cards = cardContainer.getElementsByClassName('card');
+        console.log(cards);
+
+        for(let i =0; i < cards.length; i++ ) {
+          let title = cards[i].querySelector(".card__body a.underline");
+          console.log(title);
+
+          if(title.innerText.toUpperCase().indexOf(input) > -1 ) {
+              cards[i].style.display="";
+
+          } else {
+            cards[i].style.display="none";
+          }
+        }
+
+       }
+        </script>
+</body>
+</html>
